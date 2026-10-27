@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Bbe ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,serif;color:#762747;text-align:center;background:linear-gradient(135deg,#fff0f5,#ffe0eb,#fff5f8);overflow-x:hidden}
+section{min-height:100vh;padding:65px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+h1{font-size:clamp(2.2rem,8vw,4rem);margin:12px}
+h2{font-size:clamp(1.7rem,6vw,2.5rem)}
+p{font-size:1.08rem;line-height:1.8;max-width:620px}
+button{border:0;border-radius:30px;padding:14px 23px;margin:8px;background:#e75480;color:white;font-size:1rem;cursor:pointer;box-shadow:0 5px 15px #d77b9b55}
+button:active{transform:scale(.96)}
+.card{background:#ffffffc9;border:1px solid #fff;border-radius:25px;padding:25px;max-width:650px;width:100%;box-shadow:0 12px 35px #b94e7530}
+.small{font-size:.9rem}
+.heart{position:fixed;bottom:-30px;animation:float 8s linear infinite;pointer-events:none;z-index:0}
+@keyframes float{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+section>*{z-index:1}
+#cake{font-size:100px;filter:drop-shadow(0 10px 10px #c66)}
+.candle{font-size:42px;display:inline-block;cursor:pointer}
+#flames{font-size:36px;letter-spacing:7px}
+.note{background:#fff5a8;border-radius:8px;padding:18px;margin:10px;max-width:450px;transform:rotate(-1deg);box-shadow:0 5px 12px #9c6a5522}
+#gameArea{height:280px;background:#fff0f5;border-radius:18px;position:relative;overflow:hidden;width:100%;max-width:450px}
+.catch{position:absolute;font-size:32px;background:none;box-shadow:none;padding:0;margin:0}
+footer{padding:25px}
+</style>
+</head>
+<body><section id="welcome">
+<div style="font-size:60px">💌🌹</div>
+<p>A tiny world made just for one special person...</p>
+<h1>Happy Birthday, Bbe ❤️</h1>
+<p>Some surprises are better when you open them yourself.</p>
+<button onclick="go('cakeSection')">Open your surprise 💗</button>
+</section><section id="cakeSection">
+<h2>Your birthday cake 🎂</h2>
+<p>Make a wish, Bbe. Then blow the candles out using your phone's microphone!</p>
+<div class="card">
+<div id="cake">🎂</div>
+<div id="flames">🕯️🕯️🕯️</div>
+<p id="cakeMessage">Three candles. One birthday boy. So many wishes. ❤️</p>
+<button onclick="startMic()">🎤 Blow out the candles</button>
+<button onclick="blowCandles()">✨ Extinguish candles</button>
+<p class="small" id="micStatus">Allow microphone access when your browser asks.</p>
+</div>
+<button onclick="go('quiz')">Continue 💕</button>
+</section><section id="quiz">
+<h2>A little love quiz 💘</h2>
+<div class="card">
+<p id="question">Who is the birthday boy today?</p>
+<div id="answers"></div>
+<p id="quizMessage"></p>
+<button onclick="nextQuestion()">Next question ➜</button>
+</div>
+</section><section id="game">
+<h2>Catch my love! 💗</h2>
+<p>Tap the falling hearts before they disappear. Catch 5!</p>
+<div class="card">
+<p>Hearts caught: <b id="score">0</b>/5</p>
+<div id="gameArea"></div>
+<button onclick="startGame()">Start the game 🎮</button>
+<p id="gameMessage"></p>
+</div>
+<button onclick="go('notes')">Next surprise 💌</button>
+</section><section id="notes">
+<h2>A little jar of love 🫙</h2>
+<p>Tap a note whenever you need a reminder that you're loved.</p>
+<div class="card">
+<div style="font-size:60px">🫙💖</div>
+<div class="note" id="loveNote">You make ordinary days feel special.</div>
+<button onclick="newNote()">Open another note 💌</button>
+</div>
+<button onclick="go('letter')">One last letter... 💗</button>
+</section><section id="letter">
+<h2>Just for you, Bbe ❤️</h2>
+<div class="card">
+<p>Happy birthday to my favourite person. 🥹❤️</p>
+<p>On your special day, I wish you happiness, peace, success, good health, and all the beautiful things your heart hopes for.</p>
+<p>Even on your busiest days, I hope we always make a little time for each other. I want us to talk lovingly for at least two minutes every day, even when life gets hectic. It's not about how long we talk; it's about feeling close to you. My day feels incomplete when we don't text. ❤️</p>
+<p>I hope we keep choosing each other, understanding each other, laughing together, and making memories worth keeping.</p>
+<p>Today is all about you, Bbe. You deserve so much love—not just today, but every day. 💗</p>
+<h2>Happy Birthday, my Bbe! 🎂💋</h2>
+</div>
+<button onclick="go('hug')">One final surprise 🥹</button>
+</section><section id="hug">
+<div style="font-size:100px;animation:pulse 1.2s infinite">❤️</div>
+<h1>A giant hug for you, Bbe!</h1>
+<p>If I could be beside you right now, I'd give you the biggest hug and never let the moment end. 🫂</p>
+<p>Until then, imagine this page giving you one extra-tight hug.</p>
+<button onclick="hug()">Tap for your hug 🫂</button>
+<p id="hugMessage"></p>
+<p>Made with love, just for you. 💗</p>
+</section><footer>Forever a little bit of magic ✨❤️</footer><style>@keyframes pulse{50%{transform:scale(1.13)}}</style><script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+
+for(let i=0;i<18;i++){
+ let h=document.createElement("div");
+ h.className="heart";h.textContent=["❤️","💕","💗","🌸","💖"][i%5];
+ h.style.left=Math.random()*100+"%";
+ h.style.animationDelay=Math.random()*8+"s";
+ h.style.animationDuration=(6+Math.random()*6)+"s";
+ h.style.fontSize=(16+Math.random()*22)+"px";
+ document.body.appendChild(h)
+}
+
+let candlesOut=false;
+function blowCandles(){
+ if(candlesOut)return;
+ candlesOut=true;
+ document.getElementById("flames").textContent="🤍🤍🤍";
+ document.getElementById("cakeMessage").textContent="Wish granted! May your dreams come true, Bbe! 🎉❤️";
+ document.getElementById("micStatus").textContent="Candles out! Make a wish! ✨";
+ confetti();
+}
+let audioContext, analyser, micStream, listening=false;
+async function startMic(){
+ const status=document.getElementById("micStatus");
+ if(candlesOut){status.textContent="The candles are already out! 🎉";return}
+ try{
+  const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+  micStream=stream;
+  audioContext=new (window.AudioContext||window.webkitAudioContext)();
+  const source=audioContext.createMediaStreamSource(stream);
+  analyser=audioContext.createAnalyser();
+  analyser.fftSize=1024;
+  source.connect(analyser);
+  const data=new Uint8Array(analyser.fftSize);
+  listening=true;
+  status.textContent="Microphone is on! Blow toward your phone now! 🎤";
+  let loudFrames=0;
+  function check(){
+   if(!listening||candlesOut)return;
+   analyser.getByteTimeDomainData(data);
+   let sum=0;
+   for(let i=0;i<data.length;i++){let v=(data[i]-128)/128;sum+=v*v}
+   let volume=Math.sqrt(sum/data.length);
+   if(volume>0.20)loudFrames++;else loudFrames=0;
+   if(loudFrames>=3){
+    stopMic();blowCandles();return
+   }
+   requestAnimationFrame(check)
+  }
+  check();
+  setTimeout(()=>{if(listening&&!candlesOut)status.textContent="Still listening! Blow a little louder, or use the button below. 🎤"},5000)
+ }catch(e){
+  status.textContent="Microphone unavailable. Allow microphone access or use the candle button below. ❤️"
+ }
+}
+function stopMic(){
+ listening=false;
+ if(micStream)micStream.getTracks().forEach(t=>t.stop());
+ if(audioContext)audioContext.close();
+}
+function confetti(){
+ for(let i=0;i<45;i++){
+  let x=document.createElement("div");
+  x.textContent=["💖","🎉","✨","💕","🎊"][i%5];
+  x.style.position="fixed";x.style.left=Math.random()*100+"vw";x.style.top="-30px";
+  x.style.fontSize="25px";x.style.zIndex="10";x.style.pointerEvents="none";
+  x.style.transition="transform 2.5s linear,opacity 2.5s";
+  document.body.appendChild(x);
+  setTimeout(()=>{x.style.transform="translateY(110vh) rotate(500deg)";x.style.opacity="0"},30);
+  setTimeout(()=>x.remove(),2700)
+ }
+}
+const questions=[
+ {q:"Who is the birthday boy today?",a:["Bbe ❤️","A random potato 🥔","A penguin 🐧"],correct:0,win:"Obviously, it's my Bbe! ❤️"},
+ {q:"What does your birthday deserve?",a:["Love and happiness 💗","Extra cake 🎂","Both, obviously! 😌"],correct:2,win:"Correct! You deserve ALL the love and cake! 🎂"},
+ {q:"One tiny request from me?",a:["Never talk to me 😭","Make a little time for us every day ❤️","Forget the cake"],correct:1,win:"Just a little loving conversation every day. That's precious to me. 💕"}
+];
+let qi=0;
+function renderQuestion(){
+ const q=questions[qi];
+ document.getElementById("question").textContent=q.q;
+ document.getElementById("answers").innerHTML="";
+ q.a.forEach((a,i)=>{
+  let b=document.createElement("button");b.textContent=a;
+  b.onclick=()=>{
+   document.getElementById("quizMessage").textContent=i===q.correct?q.win:"Haha, try again, birthday boy! 😘";
+   if(i===q.correct)confetti()
+  };
+  document.getElementById("answers").appendChild(b)
+ });
+}
+function nextQuestion(){qi=(qi+1)%questions.length;document.getElementById("quizMessage").textContent="";renderQuestion()}
+renderQuestion();
+
+const notes=[
+"You make ordinary days feel special. ❤️",
+"Please remember to take care of yourself, Bbe. 💗",
+"I'm always cheering for your happiness and success. ✨",
+"Even two minutes of loving conversation can make my day. 🥹",
+"You deserve to feel loved, appreciated, and understood. 💕",
+"May this new year of your life bring you beautiful surprises. 🎂",
+"Here's a little reminder: someone is wishing you the happiest birthday! 💌",
+"Your smile is a lovely thing. Keep smiling, Bbe. 😊"
+];
+let ni=-1;
+function newNote(){ni=(ni+1)%notes.length;document.getElementById("loveNote").textContent=notes[ni];confetti()}
+
+let score=0,gameTimer;
+function startGame(){
+ clearInterval(gameTimer);score=0;
+ document.getElementById("score").textContent=score;
+ document.getElementById("gameMessage").textContent="Catch five hearts! 💕";
+ const area=document.getElementById("gameArea");area.innerHTML="";
+ gameTimer=setInterval(()=>{
+  if(score>=5){clearInterval(gameTimer);return}
+  let b=document.createElement("button");b.className="catch";b.textContent=["💗","💖","💕"][Math.floor(Math.random()*3)];
+  b.style.left=Math.random()*85+"%";b.style.top=Math.random()*75+"%";
+  b.onclick=()=>{
+   if(!b.isConnected)return;
+   b.remove();score++;document.getElementById("score").textContent=score;
+   if(score>=5){clearInterval(gameTimer);document.getElementById("gameMessage").textContent="You caught all my love! 🎉❤️";confetti()}
+  };
+  area.appendChild(b);
+  setTimeout(()=>b.remove(),1500)
+ },700)
+}
+function hug(){
+ document.getElementById("hugMessage").textContent="🫂🫂🫂 HUG DELIVERED! One extra-tight hug, just for you, Bbe. ❤️";
+ confetti()
+}
+</script></body>
+</html>
