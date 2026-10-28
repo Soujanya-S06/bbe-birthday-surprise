@@ -4,605 +4,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050705">
-<title>BBE.exe | Birthday Chaos</title>
+<title>Happiest Birthday BBE 🤎</title>
 
 <style>
-:root {
-  --bg: #050705;
-  --green: #9cff57;
-  --text: #e8f5e5;
-  --muted: #8b9b87;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
 body {
-  margin: 0;
-  background:
-    radial-gradient(ellipse at top, #15220f, transparent 55%),
-    #050705;
-  color: var(--text);
-  font-family: monospace;
+  min-height: 100vh;
+  background: #f5ebdd;
+  color: #6f4e37;
+  font-family: Georgia, serif;
   overflow-x: hidden;
 }
 
-body::before {
-  content: "";
+.birthday-popup {
   position: fixed;
   inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(#9cff5708 1px, transparent 1px),
-    linear-gradient(90deg, #9cff5708 1px, transparent 1px);
-  background-size: 35px 35px;
+  z-index: 1000;
+  background: rgba(65, 43, 29, 0.94);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-#float-layer {
+.popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  background: #f5ebdd;
+  border: 3px solid #a67c52;
+  border-radius: 22px;
+  padding: 38px 20px;
+  text-align: center;
+  box-shadow: 0 0 35px #c9a77c70;
+  animation: appear 0.8s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.popup-card .small-title {
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  color: #a67c52;
+}
+
+.popup-card h1 {
+  font-size: clamp(27px, 7vw, 38px);
+  line-height: 1.4;
+  color: #6f4e37;
+  margin-bottom: 20px;
+}
+
+.popup-card p {
+  font-size: 16px;
+  margin-bottom: 24px;
+  color: #8b6548;
+}
+
+.enter-btn {
+  background: #6f4e37;
+  color: #f5ebdd;
+  padding: 13px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.enter-btn:hover {
+  background: #a67c52;
+}
+
+#mainWebsite {
+  display: none;
+  min-height: 100vh;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.main-card {
+  max-width: 650px;
+  margin: 70px auto;
+  padding: 35px 22px;
+  border: 2px solid #c9a77c;
+  border-radius: 20px;
+  background: #fffaf3;
+  box-shadow: 0 10px 35px #6f4e3718;
+}
+
+.main-card h1 {
+  font-size: clamp(28px, 7vw, 45px);
+  margin-bottom: 22px;
+  color: #6f4e37;
+}
+
+.main-card p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #8b6548;
+}
+
+.decor {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+/* Floating emoji layer */
+#emojiLayer {
   position: fixed;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 5;
+  z-index: 2000;
 }
 
-.floater {
+.floating-emoji {
   position: absolute;
   bottom: -60px;
+  animation: floatUp linear forwards;
   opacity: 0;
-  font-size: 29px;
-  animation: floatUp var(--duration) linear forwards;
+  user-select: none;
 }
 
 @keyframes floatUp {
   0% {
-    transform: translate(0, 0) rotate(-8deg);
+    transform: translateY(0) rotate(0deg);
     opacity: 0;
   }
-  12% { opacity: .7; }
-  50% {
-    transform: translate(var(--drift), -50vh) rotate(8deg);
-    opacity: .65;
+  10% {
+    opacity: 0.95;
   }
-  90% { opacity: .4; }
+  85% {
+    opacity: 0.85;
+  }
   100% {
-    transform: translate(0, -115vh) rotate(-8deg);
+    transform: translateY(-115vh) rotate(25deg);
     opacity: 0;
   }
 }
 
-.page {
-  width: min(850px, 100%);
-  padding: 24px 18px 65px;
-  margin: auto;
-  position: relative;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.green { color: var(--green); }
-
-.hero {
-  min-height: 76vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 55px 0;
-}
-
-.eyebrow, .label {
-  color: var(--green);
-  letter-spacing: 2px;
-  font-size: 11px;
-}
-
-h1 {
-  font-size: clamp(43px, 10vw, 88px);
-  line-height: .95;
-  letter-spacing: -5px;
-  margin: 22px 0;
-}
-
-h1 span { display: block; color: var(--green); }
-
-.subtitle {
-  color: #aab8a6;
-  max-width: 550px;
-  line-height: 1.8;
-  font-size: 14px;
-}
-
-.terminal, .panel {
-  width: 100%;
-  border: 1px solid #9cff5738;
-  background: #080d08ed;
-  border-radius: 9px;
-  overflow: hidden;
-}
-
-.terminal-top {
-  padding: 12px;
-  border-bottom: 1px solid #9cff5725;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.terminal-body {
-  padding: 17px;
-  line-height: 1.9;
-  font-size: 12px;
-  min-height: 90px;
-  overflow-wrap: anywhere;
-}
-
-.prompt { color: var(--green); }
-.dim { color: var(--muted); }
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-button {
-  padding: 13px 16px;
-  border: 1px solid var(--green);
-  background: var(--green);
-  color: #071006;
-  font: bold 12px monospace;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: .2s;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px #9cff5730;
-}
-
-button.secondary {
-  color: var(--green);
-  background: transparent;
-}
-
-section { margin: 30px 0; }
-
-.panel { padding: clamp(18px, 4vw, 28px); }
-
-h2 {
-  font-size: clamp(23px, 5vw, 35px);
-  letter-spacing: -1px;
-  margin-top: 10px;
-}
-
-p { line-height: 1.8; }
-
-.meter-wrap { margin-top: 20px; }
-
-.meter-label {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 11px;
-  margin-bottom: 8px;
-}
-
-.meter {
-  height: 7px;
-  background: #182016;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.meter span {
-  display: block;
-  height: 100%;
-  width: 0;
-  background: var(--green);
-  box-shadow: 0 0 12px var(--green);
-  transition: width 1s;
-}
-
-.facts {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.fact {
-  padding: 14px;
-  border: 1px solid #9cff5725;
-  border-radius: 5px;
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.fact b {
-  display: block;
-  color: var(--green);
-  margin-bottom: 6px;
-}
-
-.secret {
-  display: none;
-  margin-top: 20px;
-}
-
-.secret.show {
-  display: block;
-  animation: reveal .7s ease;
-}
-
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.secret-card {
-  padding: clamp(20px, 5vw, 32px);
-  border: 1px solid #9cff5770;
-  border-radius: 8px;
-  background: linear-gradient(140deg, #142210, #080d08);
-}
-
-.secret-card h2 { color: var(--green); }
-
-.signature {
-  color: var(--green);
-  margin-top: 22px;
-}
-
-footer {
-  margin-top: 45px;
-  padding-top: 18px;
-  border-top: 1px solid #9cff5725;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  color: #71806c;
-  font-size: 10px;
-}
-
-#toast {
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translate(-50%, 20px);
-  opacity: 0;
-  pointer-events: none;
-  background: var(--green);
-  color: #071006;
-  padding: 12px 15px;
-  font-size: 12px;
-  font-weight: bold;
-  z-index: 10;
-  transition: .25s;
-  text-align: center;
-  max-width: 90%;
-}
-
-#toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-@media(max-width: 500px) {
-  .facts { grid-template-columns: 1fr; }
-  h1 { letter-spacing: -3px; }
-}
-
-@media(prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    scroll-behavior: auto !important;
+@media (prefers-reduced-motion: reduce) {
+  .floating-emoji {
+    animation-duration: 12s !important;
   }
 }
 </style>
 </head>
 
 <body>
-<div id="float-layer" aria-hidden="true"></div>
 
-<main class="page">
-
-<header>
-  <div><span class="green">●</span> BBE.OS // UNSTABLE BUILD</div>
-  <div>SYSTEM STATUS: QUESTIONABLE</div>
-</header>
-
-<div class="hero">
-  <div class="eyebrow">[ UNAUTHORIZED BIRTHDAY PROTOCOL ]</div>
-
-  <h1>
-    BIRTHDAY
-    <span>DETECTED.</span>
-  </h1>
-
-  <p class="subtitle">
-    A suspiciously old human has been detected.
-    Authorities have been informed. They said,
-    "not our problem."
-  </p>
-
-  <div class="terminal">
-    <div class="terminal-top">● ● ● &nbsp; bbe_birthday.exe</div>
-    <div class="terminal-body" id="terminal">
-      <div><span class="prompt">guest@bbe:~$</span> scanning birthday person...</div>
-      <div class="dim">Intelligence check: 404 not found.</div>
-      <div><span class="prompt">guest@bbe:~$</span> ready for nonsense.</div>
-    </div>
-  </div>
-
-  <div class="buttons">
-    <button id="start">INITIALIZE NONSENSE →</button>
-    <button class="secondary" id="roast">RUN RANDOM ROAST</button>
+<!-- Birthday popup -->
+<div class="birthday-popup" id="birthdayPopup">
+  <div class="popup-card">
+    <div class="small-title">✦ A LITTLE SURPRISE ✦</div>
+    <h1>Happiest Birthday BBE 🖕🏻💋🫂</h1>
+    <div class="decor">🤎 🖕🏻 🤎</div>
+    <p>A special little birthday wish, just for you.</p>
+    <button class="enter-btn" onclick="enterWebsite()">
+      OPEN YOUR SURPRISE 🤎
+    </button>
   </div>
 </div>
 
-<section>
-  <div class="label">// 01 — OFFICIAL DIAGNOSTICS</div>
-  <div class="panel">
-    <h2>System scan results</h2>
-    <p class="dim">Conducted by highly unqualified professionals.</p>
-
-    <div class="meter-wrap">
-      <div class="meter-label">
-        <span>Brain cells online</span>
-        <span id="brain-value">calculating...</span>
-      </div>
-      <div class="meter"><span id="brain"></span></div>
-    </div>
-
-    <div class="meter-wrap">
-      <div class="meter-label">
-        <span>Main character syndrome</span>
-        <span id="main-value">calculating...</span>
-      </div>
-      <div class="meter"><span id="main"></span></div>
-    </div>
-
-    <div class="meter-wrap">
-      <div class="meter-label">
-        <span>Chance of being annoying</span>
-        <span id="annoy-value">calculating...</span>
-      </div>
-      <div class="meter"><span id="annoy"></span></div>
-    </div>
-
-    <div class="buttons">
-      <button class="secondary" id="scan">
-        RE-RUN VERY SCIENTIFIC SCAN
-      </button>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="label">// 02 — USELESS FACTS ABOUT TODAY</div>
-  <div class="panel">
-    <h2>Patch notes: BBE v[next year]</h2>
-
-    <div class="facts">
-      <div class="fact">
-        <b>NEW FEATURE</b>
-        Now older. Still no user manual.
-      </div>
-      <div class="fact">
-        <b>KNOWN BUG</b>
-        Random nonsense continues without warning.
-      </div>
-      <div class="fact">
-        <b>PERFORMANCE</b>
-        Runs on snacks, sleep, and questionable decisions.
-      </div>
-      <div class="fact">
-        <b>SECURITY UPDATE</b>
-        Still vulnerable to being roasted by me.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="label">// 03 — FINAL LEVEL</div>
-  <div class="panel">
-    <h2>You've reached the end.</h2>
-    <p class="dim">
-      There may or may not be a hidden file.
-      Don't get emotional. That's embarrassing.
+<!-- Main website -->
+<main id="mainWebsite">
+  <div class="main-card">
+    <div class="decor">🤎 🖕🏻 💋 🫂 🤎</div>
+    <h1>Happiest Birthday, BBE!</h1>
+    <p>
+      Wishing you a beautiful year filled with happiness,
+      good health, success, peace, and everything you dream of.
+      <br><br>
+      Keep smiling and keep being the wonderful person you are. 🤎
     </p>
-
-    <button id="unlock">UNLOCK FINAL FILE 🔓</button>
-
-    <div class="secret" id="secret">
-      <div class="secret-card">
-        <div class="label">// SECRET FILE: ONLY FOR BBE</div>
-        <h2>Okay, one serious minute.</h2>
-
-        <p>Happy birthday, bbe. ❤️</p>
-
-        <p>
-          I know this website is 99% nonsense, but I genuinely
-          hope this year brings you peace, good health, big wins,
-          and plenty of reasons to smile. I'm proud of you, and
-          I'm always cheering for you—even when I'm busy annoying you.
-        </p>
-
-        <p>
-          You mean more to me than I can fit into a stupid little
-          website. I hope life gives you beautiful things, and I
-          hope I get to be beside you for a lot of them.
-        </p>
-
-        <p>
-          Now close this before we both get emotional.
-          Disgusting behaviour.
-        </p>
-
-        <div class="signature">— your favourite problem 💚</div>
-      </div>
-    </div>
+    <div class="decor">🖕🏻 🥷 🧙‍♂️ 🧞‍♂️ 👘 🐒</div>
   </div>
-</section>
-
-<footer>
-  <span>BBE.OS © ABSOLUTELY NOBODY</span>
-  <span>MADE WITH 0% PROFESSIONALISM</span>
-</footer>
-
 </main>
-<div id="toast" role="status"></div>
+
+<!-- Floating emojis -->
+<div id="emojiLayer"></div>
 
 <script>
-// ONLY these five emojis float.
-const EMOJIS = ["🖕", "🥷", "🧙‍♂️", "🧞‍♂️", "🐒"];
-const layer = document.getElementById("float-layer");
-let activeFloaters = 0;
-
-function addFloater() {
-  if (document.hidden || activeFloaters >= 5) return;
-
-  activeFloaters++;
-
-  const emoji = document.createElement("span");
-  emoji.className = "floater";
-  emoji.textContent = EMOJIS[
-    Math.floor(Math.random() * EMOJIS.length)
-  ];
-
-  emoji.style.left = (7 + Math.random() * 86) + "vw";
-  emoji.style.setProperty(
-    "--duration", (18 + Math.random() * 8) + "s"
-  );
-  emoji.style.setProperty(
-    "--drift", (-35 + Math.random() * 70) + "px"
-  );
-
-  layer.appendChild(emoji);
-
-  emoji.addEventListener("animationend", () => {
-    emoji.remove();
-    activeFloaters = Math.max(0, activeFloaters - 1);
-  }, { once: true });
-}
-
-// Gentle, slow movement with low emoji density.
-setInterval(addFloater, 3800);
-setTimeout(addFloater, 900);
-setTimeout(addFloater, 2600);
-
-const roasts = [
-  "Birthday detected. Common sense still not detected.",
-  "Your age increased. Your software remains in beta.",
-  "Congratulations on surviving another year with that personality.",
-  "Update complete: +1 year, same questionable settings.",
-  "Even your search history needs therapy.",
-  "You're not old. You're a limited-edition problem.",
-  "Achievement unlocked: still somehow everyone's problem.",
-  "Your brain sent an error report. Try again later.",
-  "Breaking news: local man continues to exist.",
-  "You have the confidence of someone who never reads instructions."
+const emojiList = [
+  "🖕🏻", "🖕🏻", "🖕🏻", "🖕🏻", "🖕🏻",
+  "🖕🏻", "🖕🏻", "🖕🏻", "🥷", "🧙‍♂️",
+  "🧞‍♂️", "👘", "🐒"
 ];
 
-const terminal = document.getElementById("terminal");
-const toast = document.getElementById("toast");
-let toastTimer;
+const emojiLayer = document.getElementById("emojiLayer");
 
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2600);
+function createFloatingEmoji() {
+  const emoji = document.createElement("span");
+  emoji.className = "floating-emoji";
+
+  // The middle finger appears much more frequently.
+  emoji.textContent = Math.random() < 0.65
+    ? "🖕🏻"
+    : emojiList[Math.floor(Math.random() * emojiList.length)];
+
+  emoji.style.left = Math.random() * 95 + "vw";
+  emoji.style.fontSize = (22 + Math.random() * 19) + "px";
+
+  const duration = 6 + Math.random() * 5;
+  emoji.style.animationDuration = duration + "s";
+
+  emojiLayer.appendChild(emoji);
+
+  setTimeout(() => emoji.remove(), duration * 1000);
 }
 
-function randomRoast() {
-  terminal.replaceChildren();
+// Frequent but spaced-out floating emojis.
+setInterval(createFloatingEmoji, 450);
 
-  const prompt = document.createElement("div");
-  prompt.innerHTML = '<span class="prompt">guest@bbe:~$</span> run --roast';
-
-  const result = document.createElement("div");
-  result.className = "dim";
-  result.textContent =
-    roasts[Math.floor(Math.random() * roasts.length)];
-
-  terminal.append(prompt, result);
-  showToast("ROAST DEPLOYED. EMOTIONAL DAMAGE: PENDING.");
+function enterWebsite() {
+  document.getElementById("birthdayPopup").style.display = "none";
+  document.getElementById("mainWebsite").style.display = "block";
 }
 
-document.getElementById("roast").addEventListener(
-  "click", randomRoast
-);
-
-document.getElementById("start").addEventListener("click", () => {
-  const messages = [
-    "> Booting nonsense engine...",
-    "  Checking brain cells... 404 not found.",
-    "> Installing birthday update...",
-    "  Please do not think too hard.",
-    "> Protocol complete. Please accept this digital nonsense."
-  ];
-
-  terminal.replaceChildren();
-
-  messages.forEach(message => {
-    const line = document.createElement("div");
-    line.textContent = message;
-    if (message.startsWith("  ")) line.className = "dim";
-    terminal.appendChild(line);
-  });
-
-  showToast("NONSENSE INITIALIZED SUCCESSFULLY.");
-});
-
-function setMeter(id, value) {
-  document.getElementById(id + "-value").textContent =
-    value + "%";
-  document.getElementById(id).style.width = value + "%";
-}
-
-function runScan() {
-  setMeter("brain", Math.floor(4 + Math.random() * 47));
-  setMeter("main", Math.floor(52 + Math.random() * 48));
-  setMeter("annoy", Math.floor(83 + Math.random() * 17));
-  showToast("SCAN COMPLETE. RESULTS ARE QUESTIONABLE.");
-}
-
-document.getElementById("scan").addEventListener("click", runScan);
-setTimeout(runScan, 700);
-
-document.getElementById("unlock").addEventListener("click", () => {
-  const secret = document.getElementById("secret");
-  const open = secret.classList.toggle("show");
-
-  document.getElementById("unlock").textContent = open
-    ? "CLOSE FILE 🔒"
-    : "UNLOCK FINAL FILE 🔓";
-
-  if (open) {
-    secret.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-    showToast("SECRET FILE OPENED. ACT NORMAL.");
-  }
-});
+// Emojis float even while the birthday popup is visible.
 </script>
+
 </body>
 </html>
