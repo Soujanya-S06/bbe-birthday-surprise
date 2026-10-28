@@ -1,359 +1,608 @@
-<!DOCTYPE html><html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Bbe ❤️</title><style>
-*{box-sizing:border-box}
+<meta name="theme-color" content="#050705">
+<title>BBE.exe | Birthday Chaos</title>
 
-body{
-  margin:0;
-  font-family:Georgia,serif;
-  text-align:center;
-  color:#a52e59;
-  background:linear-gradient(135deg,#fff0f6,#ffd6e7,#fff5fa);
-  overflow-x:hidden;
+<style>
+:root {
+  --bg: #050705;
+  --green: #9cff57;
+  --text: #e8f5e5;
+  --muted: #8b9b87;
 }
 
-.page{
-  min-height:100vh;
-  padding:30px 20px;
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at top, #15220f, transparent 55%),
+    #050705;
+  color: var(--text);
+  font-family: monospace;
+  overflow-x: hidden;
 }
 
-#home{display:flex}
-
-h1{font-size:clamp(35px,9vw,55px)}
-h2{font-size:32px}
-
-p{
-  font-size:18px;
-  line-height:1.8;
-  max-width:520px;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#9cff5708 1px, transparent 1px),
+    linear-gradient(90deg, #9cff5708 1px, transparent 1px);
+  background-size: 35px 35px;
 }
 
-button{
-  background:#ed6b9b;
-  color:white;
-  border:none;
-  padding:14px 25px;
-  margin:12px 5px;
-  border-radius:30px;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 5px 18px #d95e9145;
+#float-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
 }
 
-button:active{transform:scale(.96)}
-
-.glitter{
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  animation:floatUp linear infinite;
+.floater {
+  position: absolute;
+  bottom: -60px;
+  opacity: 0;
+  font-size: 29px;
+  animation: floatUp var(--duration) linear forwards;
 }
 
-@keyframes floatUp{
-  from{transform:translateY(110vh) rotate(0deg);opacity:0}
-  15%{opacity:1}
-  to{transform:translateY(-15vh) rotate(360deg);opacity:0}
+@keyframes floatUp {
+  0% {
+    transform: translate(0, 0) rotate(-8deg);
+    opacity: 0;
+  }
+  12% { opacity: .7; }
+  50% {
+    transform: translate(var(--drift), -50vh) rotate(8deg);
+    opacity: .65;
+  }
+  90% { opacity: .4; }
+  100% {
+    transform: translate(0, -115vh) rotate(-8deg);
+    opacity: 0;
+  }
 }
 
-.content{position:relative;z-index:2}
-
-.bigheart{
-  font-size:100px;
-  animation:beat 1.2s infinite;
+.page {
+  width: min(850px, 100%);
+  padding: 24px 18px 65px;
+  margin: auto;
+  position: relative;
 }
 
-@keyframes beat{
-  50%{transform:scale(1.15)}
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
 }
 
-.card{
-  background:#ffffffc9;
-  padding:25px 20px;
-  border-radius:25px;
-  width:100%;
-  max-width:520px;
-  box-shadow:0 8px 30px #c9578230;
-  border:1px solid white;
+.green { color: var(--green); }
+
+.hero {
+  min-height: 76vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 55px 0;
 }
 
-#cake{font-size:100px}
-
-#flames{
-  font-size:35px;
-  letter-spacing:5px;
+.eyebrow, .label {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 11px;
 }
 
-.letter{
-  text-align:left;
-  white-space:normal;
+h1 {
+  font-size: clamp(43px, 10vw, 88px);
+  line-height: .95;
+  letter-spacing: -5px;
+  margin: 22px 0;
 }
 
-.sparkle{animation:twinkle 1s infinite alternate}
+h1 span { display: block; color: var(--green); }
 
-@keyframes twinkle{
-  from{opacity:.4}
-  to{opacity:1;text-shadow:0 0 15px #ff6fa5}
+.subtitle {
+  color: #aab8a6;
+  max-width: 550px;
+  line-height: 1.8;
+  font-size: 14px;
 }
 
-</style></head><body><!-- FLOATING GLITTER HEARTS --><script>
-for(let i=0;i<28;i++){
-  let heart=document.createElement("div");
-  heart.className="glitter";
-  heart.innerHTML=["💖","💕","♡","✨","💗","♥"][Math.floor(Math.random()*6)];
-  heart.style.left=Math.random()*100+"%";
-  heart.style.animationDuration=(5+Math.random()*8)+"s";
-  heart.style.animationDelay=Math.random()*8+"s";
-  heart.style.fontSize=(15+Math.random()*25)+"px";
-  document.body.appendChild(heart);
+.terminal, .panel {
+  width: 100%;
+  border: 1px solid #9cff5738;
+  background: #080d08ed;
+  border-radius: 9px;
+  overflow: hidden;
 }
-</script><!-- PAGE 1: CUTE START --><section class="page" id="home">
-<div class="content">
-  <div class="bigheart">💗</div>
-  <p class="sparkle">✨ A little surprise made with love ✨</p>
-  <h1>Hey, Bbe! 💕</h1>
-  <p>Someone very special has a birthday surprise waiting...</p>
-  <button onclick="showPage('cakePage')">Open your surprise 💌</button>
+
+.terminal-top {
+  padding: 12px;
+  border-bottom: 1px solid #9cff5725;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.terminal-body {
+  padding: 17px;
+  line-height: 1.9;
+  font-size: 12px;
+  min-height: 90px;
+  overflow-wrap: anywhere;
+}
+
+.prompt { color: var(--green); }
+.dim { color: var(--muted); }
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 13px 16px;
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: #071006;
+  font: bold 12px monospace;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #9cff5730;
+}
+
+button.secondary {
+  color: var(--green);
+  background: transparent;
+}
+
+section { margin: 30px 0; }
+
+.panel { padding: clamp(18px, 4vw, 28px); }
+
+h2 {
+  font-size: clamp(23px, 5vw, 35px);
+  letter-spacing: -1px;
+  margin-top: 10px;
+}
+
+p { line-height: 1.8; }
+
+.meter-wrap { margin-top: 20px; }
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.meter {
+  height: 7px;
+  background: #182016;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
+  transition: width 1s;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.fact {
+  padding: 14px;
+  border: 1px solid #9cff5725;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.fact b {
+  display: block;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.secret {
+  display: none;
+  margin-top: 20px;
+}
+
+.secret.show {
+  display: block;
+  animation: reveal .7s ease;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.secret-card {
+  padding: clamp(20px, 5vw, 32px);
+  border: 1px solid #9cff5770;
+  border-radius: 8px;
+  background: linear-gradient(140deg, #142210, #080d08);
+}
+
+.secret-card h2 { color: var(--green); }
+
+.signature {
+  color: var(--green);
+  margin-top: 22px;
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 18px;
+  border-top: 1px solid #9cff5725;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #71806c;
+  font-size: 10px;
+}
+
+#toast {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  background: var(--green);
+  color: #071006;
+  padding: 12px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+  transition: .25s;
+  text-align: center;
+  max-width: 90%;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media(max-width: 500px) {
+  .facts { grid-template-columns: 1fr; }
+  h1 { letter-spacing: -3px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="float-layer" aria-hidden="true"></div>
+
+<main class="page">
+
+<header>
+  <div><span class="green">●</span> BBE.OS // UNSTABLE BUILD</div>
+  <div>SYSTEM STATUS: QUESTIONABLE</div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">[ UNAUTHORIZED BIRTHDAY PROTOCOL ]</div>
+
+  <h1>
+    BIRTHDAY
+    <span>DETECTED.</span>
+  </h1>
+
+  <p class="subtitle">
+    A suspiciously old human has been detected.
+    Authorities have been informed. They said,
+    "not our problem."
+  </p>
+
+  <div class="terminal">
+    <div class="terminal-top">● ● ● &nbsp; bbe_birthday.exe</div>
+    <div class="terminal-body" id="terminal">
+      <div><span class="prompt">guest@bbe:~$</span> scanning birthday person...</div>
+      <div class="dim">Intelligence check: 404 not found.</div>
+      <div><span class="prompt">guest@bbe:~$</span> ready for nonsense.</div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="start">INITIALIZE NONSENSE →</button>
+    <button class="secondary" id="roast">RUN RANDOM ROAST</button>
+  </div>
 </div>
-</section><!-- PAGE 2: BIRTHDAY CAKE --><section class="page" id="cakePage">
-<div class="content">
-  <h2>Happy Birthday, Bbe! 🎂</h2>
-  <p>Close your eyes, make a wish, and blow out your candles! ❤️</p>  <div class="card">
-    <div id="cake">🎂</div>
-    <div id="flames">🕯️🕯️🕯️</div>
-    <p id="cakeText">Your birthday wish is waiting! ✨</p><button onclick="startMic()">🎤 Blow the candles</button>
-<button onclick="blow()">🕯️ Blow them out</button>
-<p id="micText" style="font-size:14px">
-  Allow microphone access to blow out the candles.
-</p>
 
-  </div><button onclick="showPage('letterPage')">Open your birthday letter 💌</button>
+<section>
+  <div class="label">// 01 — OFFICIAL DIAGNOSTICS</div>
+  <div class="panel">
+    <h2>System scan results</h2>
+    <p class="dim">Conducted by highly unqualified professionals.</p>
 
-</div>
-</section><!-- PAGE 3: BIRTHDAY LETTER --><section class="page" id="letterPage">
-<div class="content">
-  <div style="font-size:55px">💌🌷</div>
-  <h2>To My Bbe ❤️</h2>  <div class="card letter">
-    <p>Happy Birthday, my Bbe! 🥹❤️</p><p>
-  Today is all about you, and I wish I could be beside you
-  to see your smile and give you the biggest hug.
-</p>
+    <div class="meter-wrap">
+      <div class="meter-label">
+        <span>Brain cells online</span>
+        <span id="brain-value">calculating...</span>
+      </div>
+      <div class="meter"><span id="brain"></span></div>
+    </div>
 
-<p>
-  I wish you endless happiness, good health, success, peace,
-  and all the beautiful things you dream of. You deserve so
-  many reasons to smile, today and always. 💗
-</p>
+    <div class="meter-wrap">
+      <div class="meter-label">
+        <span>Main character syndrome</span>
+        <span id="main-value">calculating...</span>
+      </div>
+      <div class="meter"><span id="main"></span></div>
+    </div>
 
-<p>
-  And Bbe, there's one little thing I wish for us.
-  Even when you're busy, please make at least two minutes
-  every day to talk to me lovingly. 🥹
-  It's not about how long we talk. It's about feeling close
-  to you. My day feels a little empty when we don't text.
-  ❤️
-</p>
+    <div class="meter-wrap">
+      <div class="meter-label">
+        <span>Chance of being annoying</span>
+        <span id="annoy-value">calculating...</span>
+      </div>
+      <div class="meter"><span id="annoy"></span></div>
+    </div>
 
-<p>
-  I hope we keep understanding each other, making memories,
-  laughing together, and choosing each other through
-  everything.
-</p>
+    <div class="buttons">
+      <button class="secondary" id="scan">
+        RE-RUN VERY SCIENTIFIC SCAN
+      </button>
+    </div>
+  </div>
+</section>
 
-<p>
-  No matter how busy life gets, I hope we never forget
-  the little things that make us special. 💕
-</p>
+<section>
+  <div class="label">// 02 — USELESS FACTS ABOUT TODAY</div>
+  <div class="panel">
+    <h2>Patch notes: BBE v[next year]</h2>
 
-<p>
-  Happy Birthday once again, Bbe!
-  May this year bring you everything your heart wishes for.
-  🎂💋
-</p>
+    <div class="facts">
+      <div class="fact">
+        <b>NEW FEATURE</b>
+        Now older. Still no user manual.
+      </div>
+      <div class="fact">
+        <b>KNOWN BUG</b>
+        Random nonsense continues without warning.
+      </div>
+      <div class="fact">
+        <b>PERFORMANCE</b>
+        Runs on snacks, sleep, and questionable decisions.
+      </div>
+      <div class="fact">
+        <b>SECURITY UPDATE</b>
+        Still vulnerable to being roasted by me.
+      </div>
+    </div>
+  </div>
+</section>
 
-<p style="text-align:center">
-  <b>With all my love, always. ❤️</b>
-</p>
+<section>
+  <div class="label">// 03 — FINAL LEVEL</div>
+  <div class="panel">
+    <h2>You've reached the end.</h2>
+    <p class="dim">
+      There may or may not be a hidden file.
+      Don't get emotional. That's embarrassing.
+    </p>
 
-  </div><button onclick="showPage('hugPage')">One last thing... 🥹</button>
+    <button id="unlock">UNLOCK FINAL FILE 🔓</button>
 
-</div>
-</section><!-- PAGE 4: VIRTUAL HUG --><section class="page" id="hugPage">
-<div class="content">
-  <div class="bigheart">❤️</div>
-  <h1>A Hug For You, Bbe 🫂</h1>  <p>
-    If I were with you right now, I'd wrap my arms around you
-    and give you the tightest, warmest hug ever. 🥹💕
-  </p>  <p>Until then, here's a little hug from my heart to yours.</p><button onclick="sendHug()">Tap for your hug 🫂</button>
+    <div class="secret" id="secret">
+      <div class="secret-card">
+        <div class="label">// SECRET FILE: ONLY FOR BBE</div>
+        <h2>Okay, one serious minute.</h2>
 
-  <h2 id="hugText"></h2>
-  <p class="sparkle">Happy Birthday, my favourite person! 💗✨</p>
-</div>
-</section><script>
-function showPage(id){
-  document.querySelectorAll(".page").forEach(page=>{
-    page.style.display="none";
+        <p>Happy birthday, bbe. ❤️</p>
+
+        <p>
+          I know this website is 99% nonsense, but I genuinely
+          hope this year brings you peace, good health, big wins,
+          and plenty of reasons to smile. I'm proud of you, and
+          I'm always cheering for you—even when I'm busy annoying you.
+        </p>
+
+        <p>
+          You mean more to me than I can fit into a stupid little
+          website. I hope life gives you beautiful things, and I
+          hope I get to be beside you for a lot of them.
+        </p>
+
+        <p>
+          Now close this before we both get emotional.
+          Disgusting behaviour.
+        </p>
+
+        <div class="signature">— your favourite problem 💚</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>BBE.OS © ABSOLUTELY NOBODY</span>
+  <span>MADE WITH 0% PROFESSIONALISM</span>
+</footer>
+
+</main>
+<div id="toast" role="status"></div>
+
+<script>
+// ONLY these five emojis float.
+const EMOJIS = ["🖕", "🥷", "🧙‍♂️", "🧞‍♂️", "🐒"];
+const layer = document.getElementById("float-layer");
+let activeFloaters = 0;
+
+function addFloater() {
+  if (document.hidden || activeFloaters >= 5) return;
+
+  activeFloaters++;
+
+  const emoji = document.createElement("span");
+  emoji.className = "floater";
+  emoji.textContent = EMOJIS[
+    Math.floor(Math.random() * EMOJIS.length)
+  ];
+
+  emoji.style.left = (7 + Math.random() * 86) + "vw";
+  emoji.style.setProperty(
+    "--duration", (18 + Math.random() * 8) + "s"
+  );
+  emoji.style.setProperty(
+    "--drift", (-35 + Math.random() * 70) + "px"
+  );
+
+  layer.appendChild(emoji);
+
+  emoji.addEventListener("animationend", () => {
+    emoji.remove();
+    activeFloaters = Math.max(0, activeFloaters - 1);
+  }, { once: true });
+}
+
+// Gentle, slow movement with low emoji density.
+setInterval(addFloater, 3800);
+setTimeout(addFloater, 900);
+setTimeout(addFloater, 2600);
+
+const roasts = [
+  "Birthday detected. Common sense still not detected.",
+  "Your age increased. Your software remains in beta.",
+  "Congratulations on surviving another year with that personality.",
+  "Update complete: +1 year, same questionable settings.",
+  "Even your search history needs therapy.",
+  "You're not old. You're a limited-edition problem.",
+  "Achievement unlocked: still somehow everyone's problem.",
+  "Your brain sent an error report. Try again later.",
+  "Breaking news: local man continues to exist.",
+  "You have the confidence of someone who never reads instructions."
+];
+
+const terminal = document.getElementById("terminal");
+const toast = document.getElementById("toast");
+let toastTimer;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
+function randomRoast() {
+  terminal.replaceChildren();
+
+  const prompt = document.createElement("div");
+  prompt.innerHTML = '<span class="prompt">guest@bbe:~$</span> run --roast';
+
+  const result = document.createElement("div");
+  result.className = "dim";
+  result.textContent =
+    roasts[Math.floor(Math.random() * roasts.length)];
+
+  terminal.append(prompt, result);
+  showToast("ROAST DEPLOYED. EMOTIONAL DAMAGE: PENDING.");
+}
+
+document.getElementById("roast").addEventListener(
+  "click", randomRoast
+);
+
+document.getElementById("start").addEventListener("click", () => {
+  const messages = [
+    "> Booting nonsense engine...",
+    "  Checking brain cells... 404 not found.",
+    "> Installing birthday update...",
+    "  Please do not think too hard.",
+    "> Protocol complete. Please accept this digital nonsense."
+  ];
+
+  terminal.replaceChildren();
+
+  messages.forEach(message => {
+    const line = document.createElement("div");
+    line.textContent = message;
+    if (message.startsWith("  ")) line.className = "dim";
+    terminal.appendChild(line);
   });
 
-  document.getElementById(id).style.display="flex";
-  window.scrollTo({top:0,behavior:"smooth"});
+  showToast("NONSENSE INITIALIZED SUCCESSFULLY.");
+});
+
+function setMeter(id, value) {
+  document.getElementById(id + "-value").textContent =
+    value + "%";
+  document.getElementById(id).style.width = value + "%";
 }
 
-let candlesOut=false;
-let stream=null;
-let audioContext=null;
-let listening=false;
-
-function blow(){
-  if(candlesOut)return;
-
-  candlesOut=true;
-  listening=false;
-
-  if(stream){
-    stream.getTracks().forEach(track=>track.stop());
-    stream=null;
-  }
-
-  if(audioContext){
-    audioContext.close();
-    audioContext=null;
-  }
-
-  document.getElementById("flames").textContent="🤍🤍🤍";
-  document.getElementById("cakeText").textContent=
-    "Yayyy! 🎉 Happy Birthday, Bbe! May all your wishes come true! ❤️";
-
-  document.getElementById("micText").textContent=
-    "Candles blown out! Make your birthday wish! ✨";
-
-  celebrate();
+function runScan() {
+  setMeter("brain", Math.floor(4 + Math.random() * 47));
+  setMeter("main", Math.floor(52 + Math.random() * 48));
+  setMeter("annoy", Math.floor(83 + Math.random() * 17));
+  showToast("SCAN COMPLETE. RESULTS ARE QUESTIONABLE.");
 }
 
-async function startMic(){
-  if(candlesOut)return;
+document.getElementById("scan").addEventListener("click", runScan);
+setTimeout(runScan, 700);
 
-  const status=document.getElementById("micText");
+document.getElementById("unlock").addEventListener("click", () => {
+  const secret = document.getElementById("secret");
+  const open = secret.classList.toggle("show");
 
-  try{
-    if(!navigator.mediaDevices ||
-       !navigator.mediaDevices.getUserMedia){
-      status.textContent="Microphone unavailable. Please use the candle button.";
-      return;
-    }
+  document.getElementById("unlock").textContent = open
+    ? "CLOSE FILE 🔒"
+    : "UNLOCK FINAL FILE 🔓";
 
-    stream=await navigator.mediaDevices.getUserMedia({audio:true});
-
-    audioContext=new (window.AudioContext||window.webkitAudioContext)();
-
-    if(audioContext.state==="suspended"){
-      await audioContext.resume();
-    }
-
-    const source=audioContext.createMediaStreamSource(stream);
-    const analyser=audioContext.createAnalyser();
-
-    analyser.fftSize=1024;
-    source.connect(analyser);
-
-    const data=new Uint8Array(analyser.fftSize);
-    listening=true;
-    status.textContent="Listening... Blow toward your microphone! 🎤💨";
-
-    let loudFrames=0;
-    let startTime=Date.now();
-
-    function listen(){
-      if(!listening||candlesOut)return;
-
-      analyser.getByteTimeDomainData(data);
-
-      let sum=0;
-
-      for(let i=0;i<data.length;i++){
-        const v=(data[i]-128)/128;
-        sum+=v*v;
-      }
-
-      const volume=Math.sqrt(sum/data.length);
-
-      if(volume>0.18){
-        loudFrames++;
-      }else{
-        loudFrames=0;
-      }
-
-      if(loudFrames>=4){
-        blow();
-        return;
-      }
-
-      if(Date.now()-startTime>30000){
-        stopListening();
-        status.textContent="Tap the candle button if the microphone didn't detect your breath. ❤️";
-        return;
-      }
-
-      requestAnimationFrame(listen);
-    }
-
-    listen();
-
-  }catch(error){
-    status.textContent="Please allow microphone access, or use the candle button below. ❤️";
+  if (open) {
+    secret.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+    showToast("SECRET FILE OPENED. ACT NORMAL.");
   }
-}
-
-function stopListening(){
-  listening=false;
-
-  if(stream){
-    stream.getTracks().forEach(track=>track.stop());
-    stream=null;
-  }
-
-  if(audioContext){
-    audioContext.close();
-    audioContext=null;
-  }
-}
-
-function celebrate(){
-  for(let i=0;i<45;i++){
-    let item=document.createElement("div");
-    item.textContent=["💖","✨","💕","🎉","💗"][Math.floor(Math.random()*5)];
-
-    item.style.position="fixed";
-    item.style.left=Math.random()*100+"vw";
-    item.style.top="-30px";
-    item.style.fontSize="25px";
-    item.style.zIndex="10";
-    item.style.pointerEvents="none";
-    item.style.transition="transform 3s linear, opacity 3s";
-
-    document.body.appendChild(item);
-
-    setTimeout(()=>{
-      item.style.transform="translateY(110vh) rotate(600deg)";
-      item.style.opacity="0";
-    },50);
-
-    setTimeout(()=>item.remove(),3100);
-  }
-}
-
-function sendHug(){
-  document.getElementById("hugText").textContent=
-    "🫂💗 HUG DELIVERED! One huge hug, just for you, Bbe! ❤️";
-
-  celebrate();
-}
-</script></body>
+});
+</script>
+</body>
 </html>
